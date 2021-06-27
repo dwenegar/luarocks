@@ -134,7 +134,8 @@ function fetch.fetch_url(url, filename, cache, mirroring)
          return nil, "Local file not found: " .. fullname .. hint
       end
       filename = filename or dir.base_name(pathname)
-      local dstname = dir.normalize(fs.absolute_name(dir.path(".", filename)))
+      local tempdir = fs.system_temp_dir()
+      local dstname = dir.normalize(fs.absolute_name(dir.path(tempdir, filename)))
       local ok, err
       if fullname == dstname then
          ok = true
